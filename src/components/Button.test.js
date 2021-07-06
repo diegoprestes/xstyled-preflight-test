@@ -3,9 +3,10 @@ import {
   ThemeProvider,
   defaultTheme,
 } from "@xstyled/styled-components";
-import { Button } from "./components/Button";
+import { render, screen } from "@testing-library/react";
+import { Button } from "./Button";
 
-function App() {
+const renderProviders = () => {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Preflight />
@@ -15,6 +16,10 @@ function App() {
       </Button>
     </ThemeProvider>
   );
-}
+};
 
-export default App;
+test("render Button", () => {
+  render(renderProviders());
+
+  expect(screen.getByText(/learn react/i)).toBeInTheDocument();
+});
